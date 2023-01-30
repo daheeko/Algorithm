@@ -1,11 +1,11 @@
 n = int(input())
-s = [0 for i in range(301)]
-dp = [0 for i in range(301)]
+a = [0] * 301
+d = [0] * 301
 for i in range(n):
-    s[i] = int(input())
-dp[0] = s[0]
-dp[1] = s[0] + s[1]
-dp[2] = max(s[1] + s[2], s[0] + s[2])
+    a[i] = int(input())
+d[0] = a[0]
+d[1] = a[0] + a[1]
+d[2] = max(a[0] + a[2], a[1] + a[2])
 for i in range(3, n):
-    dp[i] = max(dp[i - 3] + s[i - 1] + s[i], dp[i - 2] + s[i])
-print(dp[n - 1])
+    d[i] = max(d[i-3] + a[i-1] + a[i], d[i-2] + a[i])
+print(d[n - 1])
