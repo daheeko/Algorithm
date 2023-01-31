@@ -1,11 +1,11 @@
 n = int(input())
 d = [0] * 100001
+sqrt = [i*i for i in range(1, int(n**0.5)+1)]  # 제곱수만 저장
 for i in range(1,n+1):
-    d[i] = i   # 1^2으로 i를 만들 때의 개수(최댓값)
-    for j in range(1, i):
-        if j**2 > i:
+    temp = []
+    for j in sqrt:
+        if j > i:
             break
-        # d[i] = min(d[i], 1 + d[i - j**2])
-        if d[i] > 1 + d[i - j**2]:
-            d[i] = 1 + d[i - j**2]  # 제곱수에 대한 값만 체크해서 갱신
+        temp.append(d[i-j] + 1)
+    d[i] = min(temp)
 print(d[n])
