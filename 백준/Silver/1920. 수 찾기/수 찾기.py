@@ -1,21 +1,7 @@
-from bisect import bisect_left, bisect_right
-
-def count_by_range(array, right, left):
-    right_idx = bisect_right(array, right)
-    left_idx=  bisect_left(array, left)
-    return right_idx - left_idx
-
-
 n = int(input())
-a = list(map(int, input().split()))
+a = set(input().split())
 m = int(input())
-b = list(map(int, input().split()))
+b = input().split()
 
-a.sort()
-
-for i in b:
-    if count_by_range(a, i, i) == 0:
-        print(0)
-    else:
-        print(1)
-    
+answer = '\n'.join('1' if x in a else '0' for x in b)
+print(answer)
