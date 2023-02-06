@@ -1,47 +1,31 @@
 n, m = map(int, input().split())
 graph = [[c for c in input()] for _ in range(m)]
+w, b = 0, 0
+cnt = 0
 
-cnt_w = []
-cnt_b = []
-w = 0
-b = 0
-
-def dfs_w(x, y):
-    if x < 0 or x >= m or y < 0 or y >= n:
+def dfs(x, y, team):
+    global cnt
+    if x < 0 or x >= m or y < 0 or y >= n or graph[x][y] == 'X':
         return False
-    if graph[x][y] == 'W':
+    if graph[x][y] == team:
         graph[x][y] = 'X'
-        cnt_w.append(1)  # 
-        dfs_w(x-1, y)
-        dfs_w(x, y-1)
-        dfs_w(x+1, y)
-        dfs_w(x, y+1) 
-        return True
-    return False
-
-
-def dfs_b(x, y):
-    if x < 0 or x >= m or y < 0 or y >= n:
-        return False
-    if graph[x][y] == 'B':
-        graph[x][y] = 'X'
-        cnt_b.append(1)  # 
-        dfs_b(x-1, y)
-        dfs_b(x, y-1)
-        dfs_b(x+1, y)
-        dfs_b(x, y+1) 
+        cnt += 1
+        dfs(x-1, y, team)
+        dfs(x, y-1, team)
+        dfs(x+1, y, team)
+        dfs(x, y+1, team) 
         return True
     return False
 
 
 for i in range(m):
     for j in range(n):
-        if dfs_w(i, j):
-            w += sum(cnt_w) ** 2
-            cnt_w = []
-        elif dfs_b(i, j):
-            b += sum(cnt_b) ** 2
-            cnt_b = []
+        cnt = 0
+        team = graph[i][j]
+        if dfs(i, j, team):
+            if team == 'W':
+                w += cnt ** 2
+            elif team == 'B':
+                b += cnt ** 2
 
 print(w, b)
-
