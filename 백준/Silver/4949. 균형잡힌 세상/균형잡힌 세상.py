@@ -17,7 +17,7 @@ while True:
             else:
                 stack.append(c)
                 break
-            if c == ")" and top  == "(":
+            if c == ")" and top == "(":
                 continue
             elif c == "]" and top == "[":
                 continue
