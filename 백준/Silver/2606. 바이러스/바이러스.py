@@ -8,20 +8,16 @@ for _ in range(m):
     graph[i].append(j)
     graph[j].append(i)
 
-result = 0
-visited = [False] * (n+1)
 
-def bfs(start):
-    global result
-    q = deque([start])
-    visited[start] = True
-    while q:
-        now = q.popleft()
-        for node in graph[now]:
-            if not visited[node]:
-                q.append(node)
-                visited[node] = True
-                result += 1
+visited = [0] * (n+1)
+q = deque([1])
+visited[1] = 1
 
-bfs(1)
-print(result)
+while q:
+    now = q.popleft()
+    for node in graph[now]:
+        if visited[node] == 0:
+            q.append(node)
+            visited[node] = 1
+
+print(sum(visited) - 1)
